@@ -40,12 +40,12 @@ raw_homeless_death_counts <-
 # save our acquired central intake call data
 write.csv(
   x = raw_central_intake_call_wrap_up, 
-  file = "central_intake_calls_and_homeless_death-main/inputs/data/raw_central_intake_call.csv"
+  file = "inputs/data/raw_central_intake_call.csv"
 )
 
 # save our acquired Toronto homeless death count data
 write.csv(
   x = raw_homeless_death_counts,
-  file = "central_intake_calls_and_homeless_death-main/inputs/data/raw_homeless_death_counts.csv"
+  file = "inputs/data/raw_homeless_death_counts.csv"
 )
          
