@@ -23,11 +23,6 @@ raw_central_intake_call_wrap_up <-
     skip = 1
   )
 
-# save our acquired central intake call data
-write.csv(
-  x = raw_central_intake_call_wrap_up, 
-  file = "raw_central_intake_call.csv"
-  )
 
 # Data of Homeless Death Counts in Toronto (by month)
 raw_homeless_death_counts <-
@@ -37,16 +32,20 @@ raw_homeless_death_counts <-
     skip = 1
   )
 
-# save our acquired Toronto homeless death count data
-write.csv(
-  x = raw_homeless_death_counts,
-  file = "raw_homeless_death_counts.csv"
-)
 
 
 #### Save data ####
 # [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
 
+# save our acquired central intake call data
+write.csv(
+  x = raw_central_intake_call_wrap_up, 
+  file = "central_intake_calls_and_homeless_death-main/inputs/data/raw_central_intake_call.csv"
+)
+
+# save our acquired Toronto homeless death count data
+write.csv(
+  x = raw_homeless_death_counts,
+  file = "central_intake_calls_and_homeless_death-main/inputs/data/raw_homeless_death_counts.csv"
+)
          
