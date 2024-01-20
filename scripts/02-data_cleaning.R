@@ -18,6 +18,12 @@ library(zoo)
 # first clean the raw_central_intake_call dataset
 raw_central_intake_call <- read_csv("inputs/data/raw_central_intake_call.csv")
 
+
+# we want to only observe data for date that are contained in both 
+# the central_intake_call dataset and the homeless_death_count dataset
+# this would be November 3rd 2020 to June 30th 2023
+
+
 cleaned_central_intake_call <-
   raw_central_intake_call |> 
   # rename desired columns with appropriate names
@@ -27,39 +33,47 @@ cleaned_central_intake_call <-
            `Code 2C - Information - Homelessness & Prevention Services`) |> 
   # keep only the desired columns for easier computation
   select(Date, Total_Calls_Coded, Referral_to_Shelter, 
-         Information_Homelessness_and_Prevention)
+         Information_Homelessness_and_Prevention) |> 
+  filter(Date <= "2023-06-30") |>
+  # reorganize and use group_by to sum up values by month 
+  # for easier visualization
+  group_by(Month = lubridate::ceiling_date(Date, "month") - 1) |> 
+  summarise(Calls_Coded_month = sum(Total_Calls_Coded), 
+            Referral_to_Shelter_month = sum(Referral_to_Shelter), 
+            Information_Homelessness_and_Prevention_month = 
+              sum(Information_Homelessness_and_Prevention))
 
 
 # then clean the raw_homeless_death_counts dataset
 raw_homeless_death_counts <- read_csv("inputs/data/raw_homeless_death_counts.csv")
 
 
-last_day_of_month = c(31,28,31,30,31,30,31,31,30,31,30,31)
+Date_day = seq(as.Date("2020-11-01"), as.Date("2023-06-30"), by = 1)
 
-cleaned_homeless_death_counts <- raw_homeless_death_counts |> 
+# create a tibble for proper date class
+date_homeless_death_counts <- 
+  tibble(
+    # we want just the last day of the month here because death counts are
+    #only definitively summed up on the last day of the month
+    "Date_month" = ceiling_date(Date_day, "month")
+  ) |> distinct() |> mutate(Date_month = Date_month - 1)
+
+
+
+cleaned_homeless_death_counts <- raw_homeless_death_counts|> 
   #cleaning up the names of columns to exclude spaces
   rename(Year = `Year of death`, Month = `Month of death`) |> 
   # filter out rows that has Month == unknown
   # we will lose some data here, but dates otherwise cannot correspond
   # to other datasets in the paper
-  filter(!(Month %in% c("Unknown"))) |> 
-  mutate(Month = c(rep(x = 1:12, times = 6), c(1:6)), 
-         # Since date types need a day, I will use the last day of the month
-         # this is because death count of the entire month only ends when 
-         # the last day of the month has past
-         Day = c(rep(x = last_day_of_month, times = 6), c(31,28,31,30,31,30))) |> 
-  # Febuary of 2020 is a special month, there was 29 days in Feb of 2020
-  mutate(Day = ifelse(row_number() == 38, 29, Day)) |> 
-  # combining the year, month, and day together to form a date class
-  mutate(Date = make_date(Year, Month, Day)) |>
+  filter(!(Month %in% c("Unknown")))
+
+# we want to keep only the value from Nov 2020 to June 2023
+cleaned_homeless_death_counts <- 
+  cbind(date_homeless_death_counts, cleaned_homeless_death_counts[-(1:46),]) |> 
   # mutate a new column that will serve as the name displayed in graphs later
-  mutate(Date_Displayed = zoo:: as.yearmon(Date))
-
-
-# select only the data we want to use in analysis
-cleaned_homeless_death_counts <- cleaned_homeless_death_counts |> 
-  select(Date_Displayed, Date, Count)
-cleaned_homeless_death_counts
+  mutate(Date_Displayed = zoo:: as.yearmon(Date_month))|>
+  select(Date_Displayed, Date_month, Count)
 
 #### Save data ####
 # save as cleaned_central_intake_call
