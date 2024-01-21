@@ -18,13 +18,11 @@ library(zoo)
 # first clean the raw_central_intake_call dataset
 raw_central_intake_call <- read_csv("inputs/data/raw_central_intake_call.csv")
 
-
 # we want to only observe data for date that are contained in both 
 # the central_intake_call dataset and the homeless_death_count dataset
 # this would be November 3rd 2020 to June 30th 2023
 
-
-cleaned_central_intake_call <-
+cleaned_central_intake_call_per_day <-
   raw_central_intake_call |> 
   # rename desired columns with appropriate names
   rename(Total_Calls_Coded = `Total calls coded`, 
@@ -34,9 +32,12 @@ cleaned_central_intake_call <-
   # keep only the desired columns for easier computation
   select(Date, Total_Calls_Coded, Referral_to_Shelter, 
          Information_Homelessness_and_Prevention) |> 
-  filter(Date <= "2023-06-30") |>
-  # reorganize and use group_by to sum up values by month 
-  # for easier visualization
+  filter(Date <= "2023-06-30") 
+
+# reorganize and use group_by to sum up values by month 
+# for easier visualization
+cleaned_central_intake_call <-
+  cleaned_central_intake_call_per_day |>
   group_by(Month = lubridate::ceiling_date(Date, "month") - 1) |> 
   summarise(Calls_Coded_month = sum(Total_Calls_Coded), 
             Referral_to_Shelter_month = sum(Referral_to_Shelter), 
@@ -44,9 +45,11 @@ cleaned_central_intake_call <-
               sum(Information_Homelessness_and_Prevention))
 
 
-# then clean the raw_homeless_death_counts dataset
-raw_homeless_death_counts <- read_csv("inputs/data/raw_homeless_death_counts.csv")
 
+
+
+# Now we want to clean the raw_homeless_death_counts dataset
+raw_homeless_death_counts <- read_csv("inputs/data/raw_homeless_death_counts.csv")
 
 Date_day = seq(as.Date("2020-11-01"), as.Date("2023-06-30"), by = 1)
 
@@ -57,8 +60,6 @@ date_homeless_death_counts <-
     #only definitively summed up on the last day of the month
     "Date_month" = ceiling_date(Date_day, "month")
   ) |> distinct() |> mutate(Date_month = Date_month - 1)
-
-
 
 cleaned_homeless_death_counts <- raw_homeless_death_counts|> 
   #cleaning up the names of columns to exclude spaces
@@ -73,7 +74,14 @@ cleaned_homeless_death_counts <-
   cbind(date_homeless_death_counts, cleaned_homeless_death_counts[-(1:46),]) |> 
   # mutate a new column that will serve as the name displayed in graphs later
   mutate(Date_Displayed = zoo:: as.yearmon(Date_month))|>
-  select(Date_Displayed, Date_month, Count)
+  select(Date_Displayed, Date_month, Count) 
+#change class of Date_Displayed column to be chr
+cleaned_homeless_death_counts <- cleaned_homeless_death_counts |> 
+  mutate(Date_Displayed = as.character(Date_Displayed))
+
+
+
+
 
 #### Save data ####
 # save as cleaned_central_intake_call
