@@ -1,9 +1,8 @@
 ---
-title: "No Correlations were Found between the efforts made by the Staff of Toronto's Central Intake Line and Toronto;s Homeless Death Counts"
-subtitle: "My subtitle if needed"
+title: "No Correlations were Found between the efforts made by the Staff of Toronto's Central Intake Line and Toronto's Homeless Death Counts"
 author: 
   - Sandy Yu
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/Jingying-yu/central_intake_calls_and_homeless_death_count.git"
 date: today
 date-format: long
 abstract: "For the City of Toronto, the physical well-being of its local homeless population has always been one of its primary focuses. Numerous social efforts, funded by the City, were made in attempts to reduce the death rate of the local homeless population. In order to visualize the magnitude of social impact enforced by the City of Toronto, analyses were performed to investigate the correlation between the efforts made by the staff of Toronto’s Central Intake Line and the monthly homeless death counts between November 2020 to June 2023 using data from OpenDataToronto. Staff efforts such as the number of calls coded, number of referral to shelter, and number of information for homelessness prevention, were documented and compared against the monthly homeless death counts. No discernible correlations were found between each of these efforts to the monthly homeless death counts."
@@ -35,10 +34,10 @@ Analyses and findings in this paper are structured into several sections: @sec-d
 
 
 
-
+\newpage
 # Data {#sec-data}
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+All data used in this paper are obtained through OpenDataToronto Portal [@OpenDataToronto]. Two different datasets, Central Intake Call Wrap-Up Codes Data [@Central_Intake_Call] and Deaths of People Experiencing Homelessness[@Homeless_Death_Count], are retrieved to analyze the correlation between different factors of Toronto’s Central Call Line efforts and the monthly cumulative death counts of homeless individuals in Toronto. Data was cleaned and analyzed using the open source statistical programming language R [@citeR] and supporting packages tidyverse [@tidyverse], janitor [@janitor], dplyr [@dplyr], lubridate [@lubridate], zoo [@citeZoo], ggplot2 [@ggplot2], and knitr [@knitr]. Detailed process of data extracting and cleaning can be found in the subsections below.
 
 ```{r}
 #| label: fig-bills
