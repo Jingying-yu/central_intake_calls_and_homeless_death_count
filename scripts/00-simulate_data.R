@@ -79,7 +79,6 @@ ggplot(simulated_homeless_death_counts, aes(x = Date_month, y = Count)) +
                                                                                                                       # since I only want to observe and analyse correlation between 
                                                                                                                       # homeless death counts and calls coded
                                                                                                                       # I lowered the line containing calls coded trend towards the 
-                                                                                                                      # bar plot by dividing the Calls_Coded_month value by 200
-                                                                                                                      y = Calls_Coded_month/200))
+                                                                                                            y = Calls_Coded_month/200))
 
 

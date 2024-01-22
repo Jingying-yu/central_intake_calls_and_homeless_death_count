@@ -81,12 +81,29 @@ knitr::kable(sample_central_intake_call, col.names = c("Month", "Calls Coded", "
 
 ## Deaths of People Experiencing Homelessness
 
+The Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] contains monthly cumulative records of homeless deaths. The dataset is published by Toronto Public Health [@TPH]. The earliest data record started in January of 2017, and the latest record ends in June of 2023.
 
+The original dataset contains three columns: Year of death, Month of death, and Count. The first step of data cleaning, after downloading the data, was to exclude any rows that contained an “unknown” value. Although this action created a source of error in future analyses, this is still a necessary step because we are plotting death counts against a timeline. A date column is then created to combine the information on the year and month of death. The format of this date-class column is “yyyy-mm-dd” where the “dd” is the last day of the month when the death count of the month is finalized. This design allows easier graphing of monthly cumulative counts as discrete variables against time. The date-class column is added to the original dataset by the mutate() function under the tidyverse package [@tidyverse].
 
+Cleaned data is then filtered to include only data from November 2020 to June 2023 and a new column that contains the name of the “Month Year” is added to the dataset (@tbl-death-count). The rationalization behind the filtering will be explained in @sec-data-diff-datasets.
+
+```{r}
+#| label: tbl-death-count
+#| tbl-cap: Sample of Cleaned Deaths of People Experiencing Homelessness Dataset
+#| echo: false
+
+homeless_death_counts <- read.csv(here::here("outputs/data/cleaned_homeless_death_counts.csv"))
+
+sample_homeless_death_counts <- head(homeless_death_counts, n = 3)
+
+knitr::kable(sample_homeless_death_counts, col.names = c("Date Displayed", "Last Day of Month", "Death Count"), align = c("l", "c", "c", "c"))
+```
 
 Talk way more about it. 
 
 ## Using Data from Different Datasets {#sec-data-diff-datasets}
+
+
 
 # Results {#sec-result}
 
