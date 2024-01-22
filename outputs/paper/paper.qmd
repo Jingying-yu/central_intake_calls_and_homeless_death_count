@@ -19,7 +19,6 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
 library(dplyr)
 library(lubridate)
 library(zoo)
@@ -42,7 +41,6 @@ Some of our data is of penguins (@fig-bills), from @palmerpenguins.
 #| label: fig-bills
 #| fig-cap: Bills of penguins
 #| echo: false
-
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(alpha = 0.8) +
   scale_fill_manual(values = c("darkorange","purple","cyan4"),
