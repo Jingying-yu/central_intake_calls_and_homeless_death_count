@@ -42,7 +42,8 @@ cleaned_central_intake_call <-
   summarise(Calls_Coded_month = sum(Total_Calls_Coded), 
             Referral_to_Shelter_month = sum(Referral_to_Shelter), 
             Information_Homelessness_and_Prevention_month = 
-              sum(Information_Homelessness_and_Prevention))
+              sum(Information_Homelessness_and_Prevention)) |>
+  mutate(Month = as.Date(Month))
 
 
 
