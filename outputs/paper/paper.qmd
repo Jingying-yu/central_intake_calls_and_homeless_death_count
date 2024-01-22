@@ -99,11 +99,14 @@ sample_homeless_death_counts <- head(homeless_death_counts, n = 3)
 knitr::kable(sample_homeless_death_counts, col.names = c("Date Displayed", "Last Day of Month", "Death Count"), align = c("l", "c", "c", "c"))
 ```
 
-Talk way more about it. 
+
 
 ## Using Data from Different Datasets {#sec-data-diff-datasets}
+During the data cleaning process, code chunks are written to ensure that both the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] and the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] are filtered to include only data between November 1st, 2020 to June 30st, 2023. 
 
+The decision to only include this time period is reached by taking the common time period between the two datasets. In the latest refresh, the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] begins on November 3rd, 2020 and end on December 31st, 2023; whereas the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] begins on January of 2017 and ends on June 2023.
 
+The ultimate purpose of taking the common time period is to ensure that we can plot variables of interest in the two datasets onto the same graph.
 
 # Results {#sec-result}
 
