@@ -84,6 +84,9 @@ cleaned_homeless_death_counts <- cleaned_homeless_death_counts |>
 
 
 #### Save data ####
+# save as cleaned_central_intake_call_per_day
+write_csv(cleaned_central_intake_call_per_day, 
+          "outputs/data/cleaned_central_intake_call_per_day.csv")
 # save as cleaned_central_intake_call
 write_csv(cleaned_central_intake_call, 
           "outputs/data/cleaned_central_intake_call.csv")

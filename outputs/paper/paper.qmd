@@ -21,6 +21,8 @@ library(tidyverse)
 library(dplyr)
 library(lubridate)
 library(zoo)
+library(knitr)
+library(ggplot2)
 ```
 
 
@@ -39,43 +41,52 @@ Analyses and findings in this paper are structured into several sections: @sec-d
 
 All data used in this paper are obtained through OpenDataToronto Portal [@OpenDataToronto]. Two different datasets, Central Intake Call Wrap-Up Codes Data [@Central_Intake_Call] and Deaths of People Experiencing Homelessness[@Homeless_Death_Count], are retrieved to analyze the correlation between different factors of Toronto’s Central Call Line efforts and the monthly cumulative death counts of homeless individuals in Toronto. Data was cleaned and analyzed using the open source statistical programming language R [@citeR] and supporting packages tidyverse [@tidyverse], janitor [@janitor], dplyr [@dplyr], lubridate [@lubridate], zoo [@citeZoo], ggplot2 [@ggplot2], and knitr [@knitr]. Detailed process of data extracting and cleaning can be found in the subsections below.
 
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-#| eval: false
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
 
-Talk more about it.
+## Central Intake Call Wrap-Up Codes
 
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
+On the OpenDataToronto portal, there are several datasets that reflect the City’s effort to shelter the local homeless population. The Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call], stored in the Central Intake Calls Catalogue [@Central_Intake_Call], is one of the freshest and most detailed. Data was stored and published by the Shelter, Support & Housing Administration since November of 2020 and refreshes on a monthly basis. The latest refresh occurred on January 15th, 2024.
+
+The data set provides a daily summary of the number of calls received, the number of calls classified into distinct wrap-up codes by the nature of the issue, and a count of calls under each wrap-up code. One of the example wrap-up codes in the original data set was: Code 1A - Referral to a Sleeping/Resting Space. The original data set includes 13 distinct wrap-up codes; only two codes, Code 1A — Referral to a Sleeping/Resting Space and Code 2C — Information - Homelessness & Prevention Services, were chosen for our analysis.
+
+The process of data cleaning for this dataset started from renaming and selecting. Variables of relevance: Date, Total calls coded, Code 1A, and Code 2C, were renamed into appropriate column names and selected (@tbl-daily-calls).
 
 ```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
+#| label: tbl-daily-calls
+#| tbl-cap: Sample of Renamed Central Intake Call Wrap-up Codes Variables
 #| echo: false
-#| warning: false
-#| message: false
-#| eval: false
-analysis_data <- read_csv(here::here("outputs/data/analysis_data.csv"))
 
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
+central_intake_call_per_day <- read.csv(here::here("outputs/data/cleaned_central_intake_call_per_day.csv"))
+
+sample_central_intake_call_per_day <- head(central_intake_call_per_day)
+
+knitr::kable(sample_central_intake_call_per_day, col.names = c("Date", "Calls Coded", "Referral to Shelter", "Homelessness Prevention Info"), align = c("l", "c", "c", "c"))
 ```
+
+
+
+Cleaned data is then filtered to include only data before July of 2023. Remaining Data is then summarized into monthly cumulative counts using the group_by() function and summarise() function under the tidyverse package [@tidyverse] (See @tbl-monthly-calls).The rationalization behind the filtering and summarizing actions will be explained in @sec-data-diff-datasets.
+
+```{r}
+#| label: tbl-monthly-calls
+#| tbl-cap: Sample of Cleaned Central Intake Call Wrap-up Codes Dataset
+#| echo: false
+
+central_intake_call <- read.csv(here::here("outputs/data/cleaned_central_intake_call.csv"))
+
+sample_central_intake_call <- head(central_intake_call)
+
+knitr::kable(sample_central_intake_call, col.names = c("Month", "Calls Coded", "Referral to Shelter", "Homelessness Prevention Info"), align = c("l", "c", "c", "c"))
+```
+
+
+## Deaths of People Experiencing Homelessness
+
+
+
 
 Talk way more about it. 
 
+## Using Data from Different Datasets {#sec-data-diff-datasets}
 
 # Results {#sec-result}
 
