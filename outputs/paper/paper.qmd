@@ -27,9 +27,12 @@ library(zoo)
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. 
+The City of Toronto has been consistently providing funding and staff in an effort to reduce the active homeless population within its governing district. One of the key aspects of reducing homelessness is the assignment of sheltering space. Amongst numerous city efforts, the 24/7 helpline — Toronto Central Intake Line — was created to offer referrals to emergency shelters, sleeping accommodations, and provide general information about homelessness and prevention. [@Central_Intake_Call]. Starting in 2020, detailed data about the Central Intake Line became available on the OpenDataToronto portal [@OpenDataToronto].
 
-The remainder of this paper is structured as follows. @sec-data....
+In this paper, we want to measure the magnitude of positive impact created by the Central Intake Line in relation to the monthly cumulative number of deaths in the homeless community. Using Central Intake Call Wrap-up Codes data [@Central_Intake_Call] from OpenDataToronto [@OpenDataToronto], three different aspects of the Central Intake Line efforts were isolated: total calls coded, referral to shelter, and homelessness prevention information provided. These three key aspects were measured against the monthly cumulative Deaths of People Experiencing Homelessness Data [@Homeless_Death_Count] documented by the Toronto Public Health [@TPH]. The analyses yielded no discernible correlation between each of the three efforts and the monthly death counts. Further investigation could be conducted in the future if more detailed tracking data of the individual callers became available.
+
+Analyses and findings in this paper are structured into several sections: @sec-data -- Data, @sec-result -- Result, @sec-discussion -- Discussion, and @sec-conclusion -- Conclusion. The Data section examines all datasets and variables kept for analysis, followed by an explanation of their data cleaning processes. The Result section focuses on visualizing and presenting the correlation between desired variables. The Discussion sections further evaluate the meaning behind the correlation presented in the previous section. Lastly, the arguments presented in all previous sections are wrapped up by the Conclusion section which summarizes the main findings in this paper.
+
 
 
 
@@ -41,6 +44,7 @@ Some of our data is of penguins (@fig-bills), from @palmerpenguins.
 #| label: fig-bills
 #| fig-cap: Bills of penguins
 #| echo: false
+#| eval: false
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(alpha = 0.8) +
   scale_fill_manual(values = c("darkorange","purple","cyan4"),
@@ -60,7 +64,7 @@ And also planes (@fig-planes). (You can change the height and width, but don't w
 #| echo: false
 #| warning: false
 #| message: false
-
+#| eval: false
 analysis_data <- read_csv(here::here("outputs/data/analysis_data.csv"))
 
 analysis_data |> 
@@ -74,13 +78,13 @@ analysis_data |>
 Talk way more about it. 
 
 
-# Results
+# Results {#sec-result}
 
 Our results are summarized in @tbl-modelresults.
 
 ```{r}
 #| echo: false
-#| eval: true
+#| eval: false
 #| warning: false
 #| message: false
 
@@ -92,7 +96,7 @@ first_model <-
 
 ```{r}
 #| echo: false
-#| eval: true
+#| eval: false
 #| label: tbl-modelresults
 #| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
 #| warning: false
@@ -109,7 +113,7 @@ modelsummary::modelsummary(
 
 
 
-# Discussion
+# Discussion {#sec-discussion}
 
 ## First discussion point {#sec-first-point}
 
@@ -125,23 +129,9 @@ Weaknesses and next steps should also be included.
 
 \newpage
 
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
 
 ```{r}
-#| eval: true
+#| eval: false
 #| echo: false
 #| message: false
 #| warning: false
@@ -161,7 +151,7 @@ posterior_vs_prior(first_model) +
   coord_flip()
 ```
 
-## Conclusion
+# Conclusion {#sec-conclusion}
 
 @fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
 
@@ -169,7 +159,7 @@ posterior_vs_prior(first_model) +
 
 ```{r}
 #| echo: false
-#| eval: true
+#| eval: false
 #| message: false
 #| warning: false
 #| label: fig-stanareyouokay
