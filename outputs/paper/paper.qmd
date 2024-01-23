@@ -1,5 +1,5 @@
 ---
-title: "No Correlations were Found between the efforts made by the Staff of Toronto's Central Intake Line and Toronto's Homeless Death Counts"
+title: "Some Correlations were Found between the efforts made by the Staff of Toronto's Central Intake Line and Toronto's Homeless Death Counts"
 author: 
   - Sandy Yu
 thanks: "Code and data are available at: https://github.com/Jingying-yu/central_intake_calls_and_homeless_death_count.git"
@@ -36,7 +36,6 @@ Analyses and findings in this paper are structured into several sections: @sec-d
 
 
 
-\newpage
 # Data {#sec-data}
 
 All data used in this paper are obtained through OpenDataToronto Portal [@OpenDataToronto]. Two different datasets, Central Intake Call Wrap-Up Codes Data [@Central_Intake_Call] and Deaths of People Experiencing Homelessness[@Homeless_Death_Count], are retrieved to analyze the correlation between different factors of Toronto’s Central Call Line efforts and the monthly cumulative death counts of homeless individuals in Toronto. Data was cleaned and analyzed using the open source statistical programming language R [@citeR] and supporting packages tidyverse [@tidyverse], janitor [@janitor], dplyr [@dplyr], lubridate [@lubridate], zoo [@citeZoo], ggplot2 [@ggplot2], and knitr [@knitr]. Detailed process of data extracting and cleaning can be found in the subsections below.
@@ -220,7 +219,6 @@ Potential errors exist in the final datasets used for analyses. During the data 
 Limitations to this analysis exist for a few reasons. Firstly, each Central Intake Line staff has their own understanding about which code they should assign their calls. We have no way of verifying whether the staff have categories their calls correctly. Secondly, the staff do not have enough time to conduct repeated follow-ups with each caller they were assigned to. We have no way of verifying what percentage of callers referred to a shelter actually got there. Lastly, we do not have enough information to sort the coded calls by demography. A subset of data that sorts the homeless death count by demography exists in the Deaths of People Experiencing Homelessness Catalogue [@Homeless_Death_Count], if more information about the demography of the callers were provided, more information about the relationship between variables of interest might be found. Further analysis on homeless death counts by demography can be conducted based on shelter data that contains demographic values.
 
 
-\newpage
 
 # Conclusion {#sec-conclusion}
 
