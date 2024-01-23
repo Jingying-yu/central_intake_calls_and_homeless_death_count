@@ -1,11 +1,10 @@
 #### Preamble ####
-# Purpose: Tests... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Tests cleaned data to ensure all classes, values, etc. of variables are kept/included
+# Author: Sandy Yu
+# Date: 22 January, 2024
+# Contact: jingying.yu@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: written code for data cleaning
 
 
 #### Workspace setup ####

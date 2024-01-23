@@ -1,11 +1,10 @@
 #### Preamble ####
-# Purpose: Simulates... [...UPDATE THIS...]
+# Purpose: Simulates data to predict issues that we may encounter with the real datasets
 # Author: Sandy Yu
-# Date: 19 January 2024
+# Date: January 22, 2024
 # Contact: jingying.yu@mail.utoronto.ca 
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: look at sketches file or have a basic understanding of what the data is used for
 
 
 #### Workspace setup ####

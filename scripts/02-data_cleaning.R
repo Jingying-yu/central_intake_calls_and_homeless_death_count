@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Cleans the raw plane data recorded by two observers..... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 6 April 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Cleans the raw datasets obtained from OpenDataToronto to keep variables of interest for further analysis
+# Author: Sandy Yu
+# Date: 22 January, 2024
+# Contact: jingying.yu@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: downloaded and save required data and understand what aspects of the datasets are valueable
+
 
 #### Workspace setup ####
 library(tidyverse)
