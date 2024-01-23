@@ -139,7 +139,7 @@ combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
 
 
 combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
-  geom_jitter() + geom_smooth() + 
+  geom_point() + geom_smooth() + 
   geom_line(aes(x = Month, y = Calls_Coded_month/1000), color = "red") +
   labs(
     title = "Correlation between number of Calls Coded and Homeless Death Count",
@@ -164,7 +164,7 @@ combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
 
 
 combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
-  geom_jitter() + geom_smooth() + 
+  geom_point() + geom_smooth() + 
   geom_line(aes(x = Month, y = Referral_to_Shelter_month/100), color = "purple") +
   labs(
     title = "Correlation between of Callers Referred to Shelter & Homeless Death",
@@ -190,7 +190,7 @@ combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
 
 
 combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
-  geom_jitter() + geom_smooth() + 
+  geom_point() + geom_smooth() + 
   geom_line(aes(x = Month, y = Information_Homelessness_and_Prevention_month/100), color = "darkgreen") +
   labs(
     title = "Correlation between Callers given Info on Homelessness Prevention and Homeless Death",
