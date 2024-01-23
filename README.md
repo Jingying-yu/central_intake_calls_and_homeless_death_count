@@ -2,7 +2,9 @@
 
 ## Overview
 
-This repo includes all the code used to produce the paper.
+This repository includes all the codes and files used to produce the paper.
+
+The paper analyses the correlation between the magnitude of positive impact created by the Central Intake Line in relation to the monthly cumulative number of deaths in the homeless community.
 
 
 **Statement on LLM useage: No LLMs were used for any aspect of this work.**
