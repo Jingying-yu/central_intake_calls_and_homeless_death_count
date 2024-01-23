@@ -96,7 +96,7 @@ homeless_death_counts <- read.csv(here::here("outputs/data/cleaned_homeless_deat
 
 sample_homeless_death_counts <- head(homeless_death_counts, n = 3)
 
-knitr::kable(sample_homeless_death_counts, col.names = c("Date Displayed", "Last Day of Month", "Death Count"), align = c("l", "c", "c", "c"))
+knitr::kable(sample_homeless_death_counts, col.names = c("Last Day of Month", "Death Count"), align = c("c", "c"))
 ```
 
 
@@ -118,19 +118,19 @@ Our results are summarized in @tbl-modelresults.
 #| label: fig-coded
 #| fig-cap: Visualization to show correlation between number of Calls Coded and Homeless Death Counts
 #| echo: false
+#| message: false
 
-homeless_death_counts <- read_csv(here::here("outputs/data/cleaned_homeless_death_counts.csv"), show_col_types = FALSE)
-central_intake_call <- read_csv(here::here("outputs/data/cleaned_central_intake_call.csv"), show_col_types = FALSE)
+combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
+                          show_col_types = FALSE)
 
 
-ggplot(homeless_death_counts, aes(x = Date_month, y = Count)) + 
-  geom_bar(stat = "identity", fill = "lightsteelblue", color = "lightsteelblue") +
-  geom_line(data = central_intake_call, aes(x = Month, 
-    y = Calls_Coded_month/1000)) +
+combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
+  geom_jitter() + geom_smooth() + 
+  geom_line(aes(x = Month, y = Calls_Coded_month/1000), color = "red") +
   labs(
-    title = "Correlation between number of Calls Coded and Homeless Death Counts",
-    x = "Date",
-    Y = "Count"
+    title = "Correlation between number of Calls Coded and Homeless Death Count",
+    x = "Time (in Month)",
+    y = "Count"
   )
 #still need to add a legend or label, but I haven't yep figured out how
 ```
@@ -140,19 +140,19 @@ ggplot(homeless_death_counts, aes(x = Date_month, y = Count)) +
 #| label: fig-referred
 #| fig-cap: Visualization to show correlation between number of callers referred to shelter and Homeless Death Counts
 #| echo: false
+#| message: false
 
-homeless_death_counts <- read_csv(here::here("outputs/data/cleaned_homeless_death_counts.csv"), show_col_types = FALSE)
-central_intake_call <- read_csv(here::here("outputs/data/cleaned_central_intake_call.csv"), show_col_types = FALSE)
+combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
+                          show_col_types = FALSE)
 
 
-ggplot(homeless_death_counts, aes(x = Date_month, y = Count)) + 
-  geom_bar(stat = "identity", fill = "lightsteelblue", color = "lightsteelblue") +
-  geom_line(data = central_intake_call, aes(x = Month, 
-    y = Referral_to_Shelter_month/100)) +
+combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
+  geom_jitter() + geom_smooth() + 
+  geom_line(aes(x = Month, y = Referral_to_Shelter_month/100), color = "red") +
   labs(
-    title = "Correlation between # of Callers Referred to Shelter and Homeless Death Counts",
-    x = "Date",
-    Y = "Count"
+    title = "Correlation between of Callers Referred to Shelter & Homeless Death",
+    x = "Time (in Month)",
+    y = "Count"
   )
 #still need to add a legend or label, but I haven't yep figured out how
 ```
@@ -161,22 +161,25 @@ ggplot(homeless_death_counts, aes(x = Date_month, y = Count)) +
 #| label: fig-informed
 #| fig-cap: Visualization to show correlation between number of callers given information on homelessness prevention and Homeless Death Counts
 #| echo: false
+#| message: false
 
-homeless_death_counts <- read_csv(here::here("outputs/data/cleaned_homeless_death_counts.csv"), show_col_types = FALSE)
-central_intake_call <- read_csv(here::here("outputs/data/cleaned_central_intake_call.csv"), show_col_types = FALSE)
+combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
+                          show_col_types = FALSE)
 
 
-ggplot(homeless_death_counts, aes(x = Date_month, y = Count)) + 
-  geom_bar(stat = "identity", fill = "lightsteelblue", color = "lightsteelblue") +
-  geom_line(data = central_intake_call, aes(x = Month, 
-    y = Information_Homelessness_and_Prevention_month/100)) +
+combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
+  geom_jitter() + geom_smooth() + 
+  geom_line(aes(x = Month, y = Information_Homelessness_and_Prevention_month/100), color = "red") +
   labs(
-    title = "Correlation between number of Callers given Information on Homelessness Prevention and Homeless Death Counts",
-    x = "Date",
-    Y = "Count"
+    title = "Correlation between Callers given Info on Homelessness Prevention and Homeless Death ",
+    x = "Time (in Month)",
+    y = "Count"
   )
 #still need to add a legend or label, but I haven't yep figured out how
 ```
+
+
+
 
 # Discussion {#sec-discussion}
 
@@ -193,28 +196,6 @@ If my paper were 10 pages, then should be be at least 2.5 pages. The discussion 
 Weaknesses and next steps should also be included.
 
 \newpage
-
-
-```{r}
-#| eval: false
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
-```
 
 # Conclusion {#sec-conclusion}
 

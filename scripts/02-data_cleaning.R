@@ -72,15 +72,14 @@ cleaned_homeless_death_counts <- raw_homeless_death_counts|>
 
 # we want to keep only the value from Nov 2020 to June 2023
 cleaned_homeless_death_counts <- 
-  cbind(date_homeless_death_counts, cleaned_homeless_death_counts[-(1:46),]) |> 
-  # mutate a new column that will serve as the name displayed in graphs later
-  mutate(Date_Displayed = zoo:: as.yearmon(Date_month))|>
-  select(Date_Displayed, Date_month, Count) 
-#change class of Date_Displayed column to be chr
-cleaned_homeless_death_counts <- cleaned_homeless_death_counts |> 
-  mutate(Date_Displayed = as.character(Date_Displayed))
+  cbind(date_homeless_death_counts, cleaned_homeless_death_counts[-(1:46),]) |>
+  select(Date_month, Count)
 
-
+# we now want to combine data from both datasets
+combined_data <- 
+  cbind(cleaned_central_intake_call, cleaned_homeless_death_counts) |>
+  select(Month, Calls_Coded_month, Referral_to_Shelter_month, Information_Homelessness_and_Prevention_month, Count) |>
+  rename(Death_Count = Count)
 
 
 
@@ -96,3 +95,6 @@ write_csv(cleaned_central_intake_call,
 write_csv(cleaned_homeless_death_counts, 
           "outputs/data/cleaned_homeless_death_counts.csv")
 
+# save as combined_data
+write_csv(combined_data, 
+          "outputs/data/combined_data.csv")
