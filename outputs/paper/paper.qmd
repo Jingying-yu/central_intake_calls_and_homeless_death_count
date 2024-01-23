@@ -106,14 +106,29 @@ During the data cleaning process, code chunks are written to ensure that both th
 
 The decision to only include this time period is reached by taking the common time period between the two datasets. In the latest refresh, the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] begins on November 3rd, 2020 and end on December 31st, 2023; whereas the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] begins on January of 2017 and ends on June 2023.
 
-The ultimate purpose of taking the common time period is to ensure that we can plot variables of interest in the two datasets onto the same graph.
+The ultimate purpose of taking the common time period is to ensure that we can plot variables of interest in the two datasets onto the same graph. Thus a combined dataset that kept the variables of interest in both datasets is created (@tbl-combined).
+```{r}
+#| label: tbl-combined
+#| tbl-cap: Sample of Combined dataset
+#| echo: false
 
+combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
+                          show_col_types = FALSE)
+
+sample_combined_data <- head(combined_data, n = 3)
+
+knitr::kable(sample_combined_data, col.names = c("Month", "Calls Coded", "Referral to Shelter", "Homelessness Prevention Info", "Death Count"), align = c("l","c", "c", "c","c"))
+```
 
 
 # Results {#sec-result}
 
-Our results are summarized in @tbl-modelresults.
+Between November 2020 and June 2023, there were a total of 522 cases of homeless death recorded in Toronto. The mean monthly death count is 16.3125, with a minimum of 8 recorded cases and a maximum of 26 recorded cases per month. The overall trend of homeless death cases is downward-sloping.
 
+## Number of Calls Coded & Homeless Death Count
+The first graph (@fig-coded) maps the overall trend of homeless death over time, represented by the blue line, against the adjusted cumulative number of calls coded per month. The value of calls coded per month, represented by the red line, is divided by 1000 for easier comparison against the death count. Original values are too big for any meaningful comparison.
+
+The red line in the graph visualizes the number of calls coded per month obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] between November 2020 and June 2023. Throughout the time period, there were a total of 474515 calls coded, the mean monthly number of calls coded is 14828.59. The minimum number of calls coded per month was 8367, and the maximum number of calls coded was 30520. We can see a positive growth in the number of calls being coded per month over time (@fig-coded).
 ```{r}
 #| label: fig-coded
 #| fig-cap: Visualization to show correlation between number of Calls Coded and Homeless Death Counts
@@ -135,7 +150,10 @@ combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) +
 #still need to add a legend or label, but I haven't yep figured out how
 ```
 
+## Number of Callers Referred to Shelter & Homeless Death Count
+The second graph (@fig-referred) maps the overall trend of homeless death over time, represented by the blue line, against the adjusted cumulative number of callers referred to shelters per month. The number of callers referred to shelters per month, represented by the purple line, is divided by 100 for easier comparison against the death count. Original values are too big for any meaningful comparison.
 
+The number of callers referred to shelters per month obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] between November 2020 and June 2023 is represented by the blue line in @fig-referred. Throughout the time period, there were a total of 44760 callers referred, the mean monthly number of callers referred was 1398.75. The minimum number of callers referred per month was 456, and the maximum number of callers referred was 2192. We can observe a negative growth in the number of callers referred per month over time (@fig-referred).
 ```{r}
 #| label: fig-referred
 #| fig-cap: Visualization to show correlation between number of callers referred to shelter and Homeless Death Counts
@@ -148,7 +166,7 @@ combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
 
 combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
   geom_jitter() + geom_smooth() + 
-  geom_line(aes(x = Month, y = Referral_to_Shelter_month/100), color = "red") +
+  geom_line(aes(x = Month, y = Referral_to_Shelter_month/100), color = "purple") +
   labs(
     title = "Correlation between of Callers Referred to Shelter & Homeless Death",
     x = "Time (in Month)",
@@ -157,6 +175,11 @@ combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) +
 #still need to add a legend or label, but I haven't yep figured out how
 ```
 
+
+## Number of Callers given information on Homelessness Prevention & Homeless Death Count
+The third graph (@fig-informed) maps the overall trend of homeless death over time, represented by the blue line, against the adjusted monthly cumulative number of callers provided with information about homelessness prevention. The number of callers provided with information, represented by the dark green line, is divided by 100 for easier comparison against the death count. Original values are too big for any meaningful comparison.
+
+The number of callers provided with information on homelessness prevention per month obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] between November 2020 and June 2023 is represented by the dark green line in @fig-informed. Throughout the time period, there were a total of 58333 callers provided with information, the mean monthly number of callers provided with information was 1822.906. The minimum number of callers provided with information per month was 1110, and the maximum number of callers provided with information was 2500. We can observe an initial negative growth followed by a positive growth in the number of callers provided with information per month over time (@fig-informed).
 ```{r}
 #| label: fig-informed
 #| fig-cap: Visualization to show correlation between number of callers given information on homelessness prevention and Homeless Death Counts
@@ -169,9 +192,9 @@ combined_data <- read_csv(here::here("outputs/data/combined_data.csv"),
 
 combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) + 
   geom_jitter() + geom_smooth() + 
-  geom_line(aes(x = Month, y = Information_Homelessness_and_Prevention_month/100), color = "red") +
+  geom_line(aes(x = Month, y = Information_Homelessness_and_Prevention_month/100), color = "darkgreen") +
   labs(
-    title = "Correlation between Callers given Info on Homelessness Prevention and Homeless Death ",
+    title = "Correlation between Callers given Info on Homelessness Prevention and Homeless Death",
     x = "Time (in Month)",
     y = "Count"
   )
