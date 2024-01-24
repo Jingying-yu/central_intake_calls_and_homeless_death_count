@@ -1,5 +1,5 @@
 ---
-title: "Some Correlations were Found between the efforts made by the Staff of Toronto's Central Intake Line and Toronto's Homeless Death Counts"
+title: "Analysis on the Correlations between the efforts made by the Staff of Toronto's Central Intake Line and Toronto's Homeless Death Counts"
 author: 
   - Sandy Yu
 thanks: "Code and data are available at: https://github.com/Jingying-yu/central_intake_calls_and_homeless_death_count.git"
