@@ -130,7 +130,7 @@ The first graph (@fig-coded) maps the overall trend of homeless death over time,
 The red line in the graph visualizes the number of calls coded per month obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] between November 2020 and June 2023. Throughout the time period, there were a total of 474515 calls coded, the mean monthly number of calls coded is 14828.59. The minimum number of calls coded per month was 8367, and the maximum number of calls coded was 30520. We can see a positive growth in the number of calls being coded per month over time (@fig-coded).
 ```{r}
 #| label: fig-coded
-#| fig-cap: Visualization to show correlation between number of Calls Coded and Homeless Death Counts
+#| fig-cap: Visualization to show correlation between number of Calls Coded (represented by the red line) and Homeless Death Counts (represented by the blue line)
 #| echo: false
 #| message: false
 
@@ -142,7 +142,7 @@ combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) +
   geom_point() + geom_smooth() + 
   geom_line(aes(x = Month, y = Calls_Coded_month/1000), color = "red") +
   labs(
-    title = "Correlation between number of Calls Coded and Homeless Death Count",
+    title = "Calls Coded & Homeless Death Count",
     x = "Time (in Month)",
     y = "Count"
   )
@@ -155,7 +155,7 @@ The second graph (@fig-referred) maps the overall trend of homeless death over t
 The number of callers referred to shelters per month obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] between November 2020 and June 2023 is represented by the blue line in @fig-referred. Throughout the time period, there were a total of 44760 callers referred, the mean monthly number of callers referred was 1398.75. The minimum number of callers referred per month was 456, and the maximum number of callers referred was 2192. We can observe a negative growth in the number of callers referred per month over time (@fig-referred).
 ```{r}
 #| label: fig-referred
-#| fig-cap: Visualization to show correlation between number of callers referred to shelter and Homeless Death Counts
+#| fig-cap: Visualization to show correlation between number of callers referred to shelter (represented by the purple line) and Homeless Death Counts (represented by the blue line)
 #| echo: false
 #| message: false
 
@@ -167,7 +167,7 @@ combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) +
   geom_point() + geom_smooth() + 
   geom_line(aes(x = Month, y = Referral_to_Shelter_month/100), color = "purple") +
   labs(
-    title = "Correlation between of Callers Referred to Shelter & Homeless Death",
+    title = "Callers Referred to Shelter & Homeless Death",
     x = "Time (in Month)",
     y = "Count"
   )
@@ -181,7 +181,7 @@ The third graph (@fig-informed) maps the overall trend of homeless death over ti
 The number of callers provided with information on homelessness prevention per month obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] between November 2020 and June 2023 is represented by the dark green line in @fig-informed. Throughout the time period, there were a total of 58333 callers provided with information, the mean monthly number of callers provided with information was 1822.906. The minimum number of callers provided with information per month was 1110, and the maximum number of callers provided with information was 2500. We can observe an initial negative growth followed by a positive growth in the number of callers provided with information per month over time (@fig-informed).
 ```{r}
 #| label: fig-informed
-#| fig-cap: Visualization to show correlation between number of callers given information on homelessness prevention and Homeless Death Counts
+#| fig-cap: Visualization to show correlation between number of callers given information on homelessness prevention (represented by the dark green line) and Homeless Death Counts (represented by the blue line)
 #| echo: false
 #| message: false
 
@@ -193,7 +193,7 @@ combined_data|> ggplot(mapping = aes(x = Month, y = Death_Count)) +
   geom_point() + geom_smooth() + 
   geom_line(aes(x = Month, y = Information_Homelessness_and_Prevention_month/100), color = "darkgreen") +
   labs(
-    title = "Correlation between Callers given Info on Homelessness Prevention and Homeless Death",
+    title = "Callers given Info on Homeless Prevention vs Homeless Death",
     x = "Time (in Month)",
     y = "Count"
   )
