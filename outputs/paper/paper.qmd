@@ -39,16 +39,14 @@ Analyses and findings in this paper are structured into several sections: @sec-d
 
 # Data {#sec-data}
 
-All data used in this paper are obtained through OpenDataToronto Portal [@OpenDataToronto]. Two different datasets, Central Intake Call Wrap-Up Codes Data [@Central_Intake_Call] and Deaths of People Experiencing Homelessness[@Homeless_Death_Count], are retrieved to analyze the correlation between different factors of Toronto’s Central Call Line efforts and the monthly cumulative death counts of homeless individuals in Toronto. Data was cleaned and analyzed using the open source statistical programming language R [@citeR] and supporting packages tidyverse [@tidyverse], janitor [@janitor], dplyr [@dplyr], lubridate [@lubridate], zoo [@citeZoo], ggplot2 [@ggplot2], and knitr [@knitr]. Detailed process of data extracting and cleaning can be found in the subsections below.
+All data used in this paper are obtained through OpenDataToronto Portal [@OpenDataToronto]. Two different datasets: Central Intake Call Wrap-Up Codes Data [@Central_Intake_Call] and Deaths of People Experiencing Homelessness[@Homeless_Death_Count], are retrieved to analyze the correlation between different factors of Toronto’s Central Call Line efforts and the monthly cumulative death counts of homeless individuals in Toronto. Data was cleaned and analyzed using the open source statistical programming language R [@citeR] and supporting packages tidyverse [@tidyverse], janitor [@janitor], dplyr [@dplyr], lubridate [@lubridate], zoo [@citeZoo], ggplot2 [@ggplot2], and knitr [@knitr]. Detailed description of each dataset can be found in the subsections below.
 
 
 ## Central Intake Call Wrap-Up Codes
 
 On the OpenDataToronto portal, there are several datasets that reflect the City’s effort to shelter the local homeless population. The Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call], stored in the Central Intake Calls Catalogue [@Central_Intake_Call], is one of the freshest and most detailed. Data was stored and published by the Shelter, Support & Housing Administration since November of 2020 and refreshes on a monthly basis. The latest refresh occurred on January 15th, 2024.
 
-The data set provides a daily summary of the number of calls received, the number of calls classified into distinct wrap-up codes by the nature of the issue, and a count of calls under each wrap-up code. One of the example wrap-up codes in the original data set was: Code 1A - Referral to a Sleeping/Resting Space. The original data set includes 13 distinct wrap-up codes; only two codes, Code 1A — Referral to a Sleeping/Resting Space and Code 2C — Information - Homelessness & Prevention Services, were chosen for our analysis. Code 1A and Code 2C are best suited as measurements for positive impact the Central Intake Line could provide. Other non-suitable wrap-up codes include: Code 1D - Declined Shelter/Resting Space, Code 4B - Disconnected - No Outcome, etc.
-
-The process of data cleaning is used to rename and exclude unnecessary columns. Variables of relevance: Date, Total calls coded, Code 1A, and Code 2C, were kept in the final dataset (@tbl-monthly-calls). 
+The data set provides a daily summary of the number of calls received, the number of calls classified into distinct wrap-up codes by the nature of the issue, and a count of calls under each wrap-up code. One of the example wrap-up codes in the original data set was: *Code 1A - Referral to a Sleeping/Resting Space*. The original data set includes 13 distinct wrap-up codes; only two codes, *Code 1A — Referral to a Sleeping/Resting Space* and *Code 2C — Information - Homelessness & Prevention Services*, were chosen for our analysis. Code 1A and Code 2C are best suited as measurements for positive impact the Central Intake Line could provide because they provide a count of the number of callers provided with directions or advice. Other non-suitable wrap-up codes include: *Code 1D - Declined Shelter/Resting Space*, *Code 4B - Disconnected - No Outcome*, etc.
 
 The final dataset only includes data before July of 2023. The rationalization behind the filtering and summarizing actions will be explained in @sec-data-diff-datasets.
 
@@ -69,7 +67,7 @@ knitr::kable(sample_central_intake_call, col.names = c("Month", "Calls Coded", "
 
 The Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] contains monthly cumulative records of homeless deaths. The dataset is published by Toronto Public Health [@TPH]. The earliest data record started in January of 2017, and the latest record ends in June of 2023.
 
-The original dataset contains three columns: Year of death, Month of death, and Count. After careful inspection of raw data, any rows that containing an “unknown” value are excluded. Although this action created a source of error in future analyses, this is still a necessary step because we are plotting death counts against a timeline. 
+The original dataset contains three columns: *Year of death*, *Month of death*, and *Count*. After careful inspection of raw data, any rows that containing an “unknown” value are excluded. Although this action created a source of error in future analyses, this is still a necessary step because we are plotting death counts against a timeline. 
 
 Final dataset only includes data from November 2020 to June 2023 (@tbl-death-count). The rationalization behind the filtering will be explained in @sec-data-diff-datasets.
 
@@ -87,9 +85,9 @@ knitr::kable(sample_homeless_death_counts, col.names = c("Last Day of Month", "D
 
 
 ## Using Data from Different Datasets {#sec-data-diff-datasets}
-During the data cleaning process, code chunks are written to ensure that both the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] and the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] are filtered to include only data between November 1st, 2020 to June 30st, 2023. 
+During the data cleaning process, code chunks are written to ensure that both the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] and the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] are filtered to include only data between 1st November, 2020 to 30st June, 2023. 
 
-The decision to only include this time period is reached by taking the common time period between the two datasets. In the latest refresh, the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] begins on November 3rd, 2020 and end on December 31st, 2023; whereas the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] begins on January of 2017 and ends on June 2023.
+The decision to only include this time period is reached by taking the common time period between the two datasets. In the latest refresh, the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] begins on 3rd November, 2020 and end on 31st December, 2023; whereas the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] begins on January of 2017 and ends on June 2023.
 
 The ultimate purpose of taking the common time period is to ensure that we can plot variables of interest in the two datasets onto the same graph. Thus a combined dataset that kept the variables of interest in both datasets is created (@tbl-combined).
 ```{r}
