@@ -1,5 +1,6 @@
 ---
-title: "Analysis on the Correlations between the efforts made by the Staff of Toronto's Central Intake Line and Toronto's Homeless Death Counts"
+title: "Efforts to Code Calls created a Positive Impact in Reducing Toronto's Homeless Death Counts"
+subtitle: "Analysis on the Correlations between the efforts made by Toronto's Central Intake Line and local Homeless Death Counts"
 author: 
   - Sandy Yu
 thanks: "Code and data are available at: https://github.com/Jingying-yu/central_intake_calls_and_homeless_death_count.git"
@@ -207,7 +208,7 @@ Limitations to this analysis exist for a few reasons. Firstly, each Central Inta
 
 # Conclusion {#sec-conclusion}
 
-This paper investigated the magnitude of impact created by the Central Intake Line in relation to the monthly cumulative number of deaths in the homeless community. Variables of interest such as: calls coded, number of callers referred to shelter, number of callers provided with information on homelessness prevention, and homeless death count, were obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] and the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] stored in the OpenDataToronto portal [@OpenDataToronto]. Statistical analyses yielded a negative correlation between the number of calls coded and the homeless death count, which implies a positive impact in reducing homeless death in Toronto. Other variables, such as number of callers referred to shelter and number of callers provided with information on homelessness prevention, yielded no meaningful correlation to the homeless death count. Therefore we cannot conclude the magnitude of their contribution to the reduction of homeless death count. Further analysis on homeless death counts by demography can be conducted based on shelter data that contains demographic values.
+This paper investigated the magnitude of impact created by the Central Intake Line in relation to the monthly cumulative number of deaths in the homeless community. Variables of interest such as: calls coded, number of callers referred to shelter, number of callers provided with information on homelessness prevention, and homeless death count, were obtained from the Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call] and the Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] stored in the OpenDataToronto portal [@OpenDataToronto]. Statistical analyses yielded a negative correlation between the number of calls coded and the homeless death count, which implies a positive impact in reducing homeless death in Toronto. Other variables, such as number of callers referred to shelter and number of callers provided with information on homelessness prevention, yielded no meaningful correlation to the homeless death count. Therefore we cannot conclude the magnitude of their contribution to the reduction of homeless death count. Overall, we can only conclude that the effort of Coding Calls have a positive impact on reducing homeless death in Toronto. Further analysis on homeless death counts by demography can be conducted based on shelter data that contains demographic values.
 
 
 
