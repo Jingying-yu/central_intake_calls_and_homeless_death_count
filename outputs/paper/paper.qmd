@@ -45,25 +45,11 @@ All data used in this paper are obtained through OpenDataToronto Portal [@OpenDa
 
 On the OpenDataToronto portal, there are several datasets that reflect the City’s effort to shelter the local homeless population. The Central Intake Call Wrap-Up Codes Dataset [@Central_Intake_Call], stored in the Central Intake Calls Catalogue [@Central_Intake_Call], is one of the freshest and most detailed. Data was stored and published by the Shelter, Support & Housing Administration since November of 2020 and refreshes on a monthly basis. The latest refresh occurred on January 15th, 2024.
 
-The data set provides a daily summary of the number of calls received, the number of calls classified into distinct wrap-up codes by the nature of the issue, and a count of calls under each wrap-up code. One of the example wrap-up codes in the original data set was: Code 1A - Referral to a Sleeping/Resting Space. The original data set includes 13 distinct wrap-up codes; only two codes, Code 1A — Referral to a Sleeping/Resting Space and Code 2C — Information - Homelessness & Prevention Services, were chosen for our analysis.
+The data set provides a daily summary of the number of calls received, the number of calls classified into distinct wrap-up codes by the nature of the issue, and a count of calls under each wrap-up code. One of the example wrap-up codes in the original data set was: Code 1A - Referral to a Sleeping/Resting Space. The original data set includes 13 distinct wrap-up codes; only two codes, Code 1A — Referral to a Sleeping/Resting Space and Code 2C — Information - Homelessness & Prevention Services, were chosen for our analysis. Code 1A and Code 2C are best suited as measurements for positive impact the Central Intake Line could provide. Other non-suitable wrap-up codes include: Code 1D - Declined Shelter/Resting Space, Code 4B - Disconnected - No Outcome, etc.
 
-The process of data cleaning for this dataset started from renaming and selecting. Variables of relevance: Date, Total calls coded, Code 1A, and Code 2C, were renamed into appropriate column names and selected (@tbl-daily-calls).
+The process of data cleaning is used to rename and exclude unnecessary columns. Variables of relevance: Date, Total calls coded, Code 1A, and Code 2C, were kept in the final dataset (@tbl-monthly-calls). 
 
-```{r}
-#| label: tbl-daily-calls
-#| tbl-cap: Sample of Renamed Central Intake Call Wrap-up Codes Variables
-#| echo: false
-
-central_intake_call_per_day <- read.csv(here::here("outputs/data/cleaned_central_intake_call_per_day.csv"))
-
-sample_central_intake_call_per_day <- head(central_intake_call_per_day)
-
-knitr::kable(sample_central_intake_call_per_day, col.names = c("Date", "Calls Coded", "Referral to Shelter", "Homelessness Prevention Info"), align = c("l", "c", "c", "c"))
-```
-
-
-
-Cleaned data is then filtered to include only data before July of 2023. Remaining Data is then summarized into monthly cumulative counts using the group_by() function and summarise() function under the tidyverse package [@tidyverse] (See @tbl-monthly-calls).The rationalization behind the filtering and summarizing actions will be explained in @sec-data-diff-datasets.
+The final dataset only includes data before July of 2023. The rationalization behind the filtering and summarizing actions will be explained in @sec-data-diff-datasets.
 
 ```{r}
 #| label: tbl-monthly-calls
@@ -82,9 +68,9 @@ knitr::kable(sample_central_intake_call, col.names = c("Month", "Calls Coded", "
 
 The Deaths of People Experiencing Homelessness Dataset [@Homeless_Death_Count] contains monthly cumulative records of homeless deaths. The dataset is published by Toronto Public Health [@TPH]. The earliest data record started in January of 2017, and the latest record ends in June of 2023.
 
-The original dataset contains three columns: Year of death, Month of death, and Count. The first step of data cleaning, after downloading the data, was to exclude any rows that contained an “unknown” value. Although this action created a source of error in future analyses, this is still a necessary step because we are plotting death counts against a timeline. A date column is then created to combine the information on the year and month of death. The format of this date-class column is “yyyy-mm-dd” where the “dd” is the last day of the month when the death count of the month is finalized. This design allows easier graphing of monthly cumulative counts as discrete variables against time. The date-class column is added to the original dataset by the mutate() function under the tidyverse package [@tidyverse].
+The original dataset contains three columns: Year of death, Month of death, and Count. After careful inspection of raw data, any rows that containing an “unknown” value are excluded. Although this action created a source of error in future analyses, this is still a necessary step because we are plotting death counts against a timeline. 
 
-Cleaned data is then filtered to include only data from November 2020 to June 2023 and a new column that contains the name of the “Month Year” is added to the dataset (@tbl-death-count). The rationalization behind the filtering will be explained in @sec-data-diff-datasets.
+Final dataset only includes data from November 2020 to June 2023 (@tbl-death-count). The rationalization behind the filtering will be explained in @sec-data-diff-datasets.
 
 ```{r}
 #| label: tbl-death-count
@@ -97,7 +83,6 @@ sample_homeless_death_counts <- head(homeless_death_counts, n = 3)
 
 knitr::kable(sample_homeless_death_counts, col.names = c("Last Day of Month", "Death Count"), align = c("c", "c"))
 ```
-
 
 
 ## Using Data from Different Datasets {#sec-data-diff-datasets}
